@@ -1,15 +1,27 @@
 package main
 
 import (
+	"back-end-e-tax/config"
+	"back-end-e-tax/internal/route"
+	"log"
+	"os"
+
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, Fiber!")
-	})
+	// Load config
+	config.LoadEnv()
 
-	app.Listen(":3000")
+	// Setup routes
+	route.SetupRoutes(app)
+
+	// Start server
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+	log.Fatal(app.Listen(":" + port))
 }
