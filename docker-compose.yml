@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  # บริการสำหรับแอปพลิเคชัน Golang
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: golang-fiber-app
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=youruser
+      - DB_PASSWORD=yourpassword
+      - DB_NAME=yourdb
+      - DB_PORT=5432
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  # บริการสำหรับฐานข้อมูล PostgreSQL
+  db:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: youruser
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: yourdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+# สร้าง network เฉพาะสำหรับการเชื่อมต่อ
+networks:
+  app-network:
+    driver: bridge
+
+# สร้าง volume สำหรับข้อมูล PostgreSQL
+volumes:
+  postgres_data:

@@ -2,7 +2,8 @@ package main
 
 import (
 	"back-end-e-tax/config"
-	"back-end-e-tax/internal/route"
+	"back-end-e-tax/internal/routes"
+	"back-end-e-tax/internal/seeder"
 	"log"
 	"os"
 
@@ -14,14 +15,20 @@ func main() {
 
 	// Load config
 	config.LoadEnv()
+	config.ConnectDB()
+
+	// เติมข้อมูลตัวอย่างในฐานข้อมูล
+	seeder.SeedData()
 
 	// Setup routes
-	route.SetupRoutes(app)
+	routes.SetupRoutes(app)
 
 	// Start server
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "3000"
+		port = "8080"
 	}
 	log.Fatal(app.Listen(":" + port))
 }
+
+
