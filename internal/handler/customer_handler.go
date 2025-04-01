@@ -11,7 +11,7 @@ import (
 // GetCustomers ดึงข้อมูลลูกค้าทั้งหมด
 func GetCustomers(c *fiber.Ctx) error {
 	var customers []models.Customer
-	// var customersRes []models.CustomerResponse
+	var customersRes []models.CustomerResponse
 
 	// ดึงข้อมูลลูกค้าทั้งหมดจากฐานข้อมูล
 	if err := config.DB.Find(&customers).Error; err != nil {
@@ -22,5 +22,5 @@ func GetCustomers(c *fiber.Ctx) error {
 	}
 
 	// ส่งกลับข้อมูลลูกค้า
-	return c.Status(fiber.StatusOK).JSON(customers)
+	return c.Status(fiber.StatusOK).JSON(customersRes)
 }

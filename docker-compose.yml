@@ -11,8 +11,8 @@ services:
       - "3000:3000"
     environment:
       - DB_HOST=db
-      - DB_USER=youruser
-      - DB_PASSWORD=yourpassword
+      - DB_USER=root
+      - DB_PASSWORD=1234
       - DB_NAME=yourdb
       - DB_PORT=5432
     depends_on:
@@ -22,11 +22,11 @@ services:
 
   # บริการสำหรับฐานข้อมูล PostgreSQL
   db:
-    image: postgres:13
+    image: postgres:17.4
     container_name: postgres-db
     environment:
-      POSTGRES_USER: youruser
-      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
       POSTGRES_DB: yourdb
     volumes:
       - postgres_data:/var/lib/postgresql/data
