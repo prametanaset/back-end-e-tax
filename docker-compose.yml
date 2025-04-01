@@ -22,7 +22,7 @@ services:
 
   # บริการสำหรับฐานข้อมูล PostgreSQL
   db:
-    image: postgres:17.4
+    image: postgres:16-alpine
     container_name: postgres-db
     environment:
       POSTGRES_USER: root
