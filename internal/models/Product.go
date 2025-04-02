@@ -6,10 +6,12 @@ import (
 
 type Product struct {
 	ID          uint      `gorm:"primaryKey"`
+	ProductCode string 		`gorm:"type:varchar(100);not null"`
 	Name        string    `gorm:"type:varchar(100);not null"`
 	Description string    `gorm:"type:text"`
 	Price       float64   `gorm:"not null"`
-	Stock       int       `gorm:"not null"`
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	Vat       	bool  	`gorm:"not null"`
+	VatRate     float64   `gorm:"not null"`
+	CreatedAt   time.Time `json:"createdAt" gorm:"autoCreateTime"`
+    UpdatedAt   time.Time `json:"updatedAt" gorm:"autoUpdateTime"`
 }

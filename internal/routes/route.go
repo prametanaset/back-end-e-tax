@@ -11,5 +11,12 @@ func SetupRoutes(app *fiber.App) {
 
 	// Example route
 	v1.Get("/users", handler.GetUsers) 
+
+	// customer
 	v1.Get("/customers", handler.GetCustomers) 
+	v1.Put("/customers", handler.UpdateCustomer) 
+
+	// product
+	v1.Get("/products", handler.GetProducts)
+	v1.Post("/products", handler.CreateProduct)
 }
