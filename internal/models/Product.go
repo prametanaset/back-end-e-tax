@@ -6,6 +6,7 @@ import (
 
 type Product struct {
 	ID          uint      `gorm:"primaryKey"`
+	StoreId     uint      `gorm:"type:integer;not null"`
 	ProductCode string 		`gorm:"type:varchar(100);not null"`
 	Name        string    `gorm:"type:varchar(100);not null"`
 	Description string    `gorm:"type:text"`

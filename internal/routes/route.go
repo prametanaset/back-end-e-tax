@@ -19,4 +19,6 @@ func SetupRoutes(app *fiber.App) {
 	// product
 	v1.Get("/products", handler.GetProducts)
 	v1.Post("/products", handler.CreateProduct)
+	v1.Put("/products/:id", handler.UpdateProduct)
+	v1.Delete("/products/:id", handler.DeleteProduct)
 }
