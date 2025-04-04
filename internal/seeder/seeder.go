@@ -15,18 +15,22 @@ func SeedData() {
 		// สร้างข้อมูลตัวอย่างลูกค้า
 		customers := []models.Customer{
 			{
+        StoreId : 1,
 				FirstName: "John",
 				LastName:  "Doe",
 				Email:     "johndoe@example.com",
 				Phone:     "123-456-7890",
 				Address:     "123 หมู่ที่ 16 ถ. มิตรภาพ ตำบลในเมือง อำเภอเมืองขอนแก่น ขอนแก่น 40002",
+				TaxIdNo:     "1234567890123",
 			},
 			{
+        StoreId : 1,
 				FirstName: "Jane",
 				LastName:  "Doe",
 				Email:     "janedoe@example.com",
 				Phone:     "098-765-4321",
 				Address:     "ตำบล ศิลา อำเภอเมืองขอนแก่น ขอนแก่น 40000",
+        TaxIdNo:     "1234567890123",
 			},
 		}
 
