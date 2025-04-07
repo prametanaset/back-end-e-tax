@@ -14,7 +14,9 @@ func SetupRoutes(app *fiber.App) {
 
 	// customer
 	v1.Get("/customers", handler.GetCustomers) 
-	v1.Put("/customers", handler.UpdateCustomer) 
+	v1.Post("/customers", handler.CreateCustomer) 
+	v1.Put("/customers/:id", handler.UpdateCustomer) 
+	v1.Delete("/customers/:id", handler.DeleteCustomer) 
 
 	// product
 	v1.Get("/products", handler.GetProducts)
