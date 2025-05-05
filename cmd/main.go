@@ -3,7 +3,6 @@ package main
 import (
 	"back-end-e-tax/config"
 	"back-end-e-tax/internal/routes"
-	"back-end-e-tax/internal/seeder"
 	"log"
 	"os"
 
@@ -15,18 +14,18 @@ func main() {
 	app := fiber.New()
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "http://localhost:3000",
-		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS",
-		AllowHeaders:     "Origin, Content-Type, Accept",
+		AllowOrigins: "http://localhost:3000",
+		AllowMethods: "GET,POST,PUT,DELETE,OPTIONS",
+		AllowHeaders: "Origin, Content-Type, Accept",
 		// AllowCredentials: true, // ✅ ใช้ได้เมื่อ AllowOrigins ไม่ใช่ '*'
-	}))	
+	}))
 
 	// Load config
 	config.LoadEnv()
 	config.ConnectDB()
 
 	// เติมข้อมูลตัวอย่างในฐานข้อมูล
-	seeder.SeedData()
+	// seeder.SeedData()
 
 	// Setup routes
 	routes.SetupRoutes(app)
@@ -38,5 +37,3 @@ func main() {
 	}
 	log.Fatal(app.Listen(":" + port))
 }
-
-

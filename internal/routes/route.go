@@ -1,26 +1,37 @@
 package routes
 
 import (
+	"back-end-e-tax/config"
 	"back-end-e-tax/internal/handler"
+	"back-end-e-tax/internal/repository"
+	"back-end-e-tax/internal/service"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func SetupRoutes(app *fiber.App) {
+	// Product setup
+	productRepo := repository.NewProductRepository(config.DB)
+	productService := service.NewProductService(productRepo)
+	productHandler := handler.NewProductHandler(productService)
+
+	// User setup
+	userRepo := repository.NewUserRepository(config.DB)
+	userService := service.NewUserService(userRepo)
+	userHandler := handler.NewUserHandler(userService)
+
 	v1 := app.Group("/v1")
 
-	// Example route
-	v1.Get("/users", handler.GetUsers) 
+	// Product routes
+	v1.Get("/products", productHandler.GetProducts)
+	v1.Post("/products", productHandler.CreateProduct)
+	v1.Put("/products/:id", productHandler.UpdateProduct)
+	v1.Delete("/products/:id", productHandler.DeleteProduct)
 
-	// customer
-	v1.Get("/customers", handler.GetCustomers) 
-	v1.Post("/customers", handler.CreateCustomer) 
-	v1.Put("/customers/:id", handler.UpdateCustomer) 
-	v1.Delete("/customers/:id", handler.DeleteCustomer) 
-
-	// product
-	v1.Get("/products", handler.GetProducts)
-	v1.Post("/products", handler.CreateProduct)
-	v1.Put("/products/:id", handler.UpdateProduct)
-	v1.Delete("/products/:id", handler.DeleteProduct)
+	// User routes
+	v1.Get("/users", userHandler.GetAll)
+	v1.Get("/users/:id", userHandler.GetByID)
+	v1.Post("/users", userHandler.Create)
+	v1.Put("/users/:id", userHandler.Update)
+	v1.Delete("/users/:id", userHandler.Delete)
 }
