@@ -36,5 +36,5 @@ func ConnectDB() {
 	// 	log.Fatal("seeding failed:", err)
 	// }
 
-	log.Println("Database migrated successfully!")
+	// log.Println("Database migrated successfully!")
 }

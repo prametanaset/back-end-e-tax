@@ -10,7 +10,8 @@ import (
 type UserRepository interface {
 	GetAll() ([]model.User, error)
 	GetByID(id uint) (*model.User, error)
-	GetByUsername(username string) (*model.User, error)
+	FindByUsername(username string) (*model.User, error)
+	FindByEmail(username string) (*model.User, error)
 	Create(user *model.User) error
 	Update(user *model.User) error
 	Delete(user *model.User) error
@@ -48,10 +49,18 @@ func (r *userRepository) Delete(user *model.User) error {
 	return r.db.Delete(user).Error
 }
 
-func (r *userRepository) GetByUsername(username string) (*model.User, error) {
+func (r *userRepository) FindByUsername(username string) (*model.User, error) {
 	var user model.User
 	if err := r.db.Where("username = ?", username).First(&user).Error; err != nil {
 		return nil, err
 	}
 	return &user, nil
+}
+
+func (r *userRepository) FindByEmail(email string) (*model.User, error) {
+	var u model.User
+	if err := r.db.Where("email = ?", email).First(&u).Error; err != nil {
+		return nil, err
+	}
+	return &u, nil
 }
